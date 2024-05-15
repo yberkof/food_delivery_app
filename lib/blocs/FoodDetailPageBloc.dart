@@ -40,10 +40,10 @@ class FoodDetailPageBloc with ChangeNotifier {
 
   BuildContext? context;
 
-  addToCart(FoodModel food) async {
+  addToCart(FoodModel food,int count) async {
     DatabaseSql databaseSql = DatabaseSql();
     await databaseSql.openDatabaseSql();
-    await databaseSql.insertData(food);
+    await databaseSql.insertData(food,count);
     await databaseSql.getData();
     final snackBar = SnackBar(
       content: Text('Food Added To Cart'),

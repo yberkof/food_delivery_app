@@ -18,6 +18,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:food_delivery_app/blocs/FoodDetailPageBloc.dart';
 import 'package:food_delivery_app/models/food_model.dart';
 import 'package:food_delivery_app/utils/universal_variables.dart';
@@ -26,7 +27,9 @@ import 'package:provider/provider.dart';
 
 class FoodDetailPage extends StatelessWidget {
   final FoodModel food;
+
   FoodDetailPage({required this.food});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -39,7 +42,9 @@ class FoodDetailPage extends StatelessWidget {
 
 class FoodDetailPageContent extends StatefulWidget {
   final FoodModel fooddata;
+
   FoodDetailPageContent(this.fooddata);
+
   @override
   _FoodDetailPageContentState createState() => _FoodDetailPageContentState();
 }
@@ -90,24 +95,24 @@ class _FoodDetailPageContentState extends State<FoodDetailPageContent> {
                             height: 60.0,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(0.0),
-                                  bottomRight: Radius.circular(80.0)),
-                              gradient: LinearGradient(
-                                  colors: [Colors.black45, Colors.transparent],
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter),
+                                  bottomLeft: Radius.circular(25.0),
+                                  bottomRight: Radius.circular(25.0)),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Material(
-                                color: Colors.transparent,
-                                child: Text(
-                                  foodDetailPageBloc.rating + " ★",
-                                  style: TextStyle(
-                                      fontSize: 30.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: UniversalVariables.whiteColor),
+                              borderRadius: BorderRadius.circular(25),
+                                color: Colors.orange.withOpacity(0.9),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 15),
+                                  child: Text(
+                                    foodDetailPageBloc.rating + " ★",
+                                    style: TextStyle(
+                                        fontSize: 30.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: UniversalVariables.whiteColor),
+                                  ),
                                 )),
                           ),
                         ],
@@ -117,8 +122,8 @@ class _FoodDetailPageContentState extends State<FoodDetailPageContent> {
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(0.0),
-                            bottomRight: Radius.circular(80.0)),
+                            bottomLeft: Radius.circular(25.0),
+                            bottomRight: Radius.circular(25.0)),
                         image: DecorationImage(
                             image: NetworkImage(widget.fooddata.image),
                             fit: BoxFit.cover),
@@ -159,7 +164,7 @@ class _FoodDetailPageContentState extends State<FoodDetailPageContent> {
                 padding:
                     const EdgeInsets.only(left: 18.0, top: 10.0, bottom: 10.0),
                 child: Text(
-                  "₹" + widget.fooddata.price,
+                  widget.fooddata.price + " JD ",
                   style: TextStyle(
                       fontSize: 25.0,
                       fontWeight: FontWeight.bold,
@@ -220,7 +225,7 @@ class _FoodDetailPageContentState extends State<FoodDetailPageContent> {
           Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
-                sampleDescription,
+                widget.fooddata.description,
                 style: TextStyle(
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,
@@ -264,7 +269,9 @@ class _FoodDetailPageContentState extends State<FoodDetailPageContent> {
                   borderRadius: BorderRadius.circular(30.0),
                 )),
               ),
-              onPressed: () => foodDetailPageBloc.addToCart(widget.fooddata),
+              onPressed: () {
+                foodDetailPageBloc.addToCart(widget.fooddata,foodDetailPageBloc.mItemCount);
+              },
               child: Text(
                 "Add To Cart",
                 style: TextStyle(

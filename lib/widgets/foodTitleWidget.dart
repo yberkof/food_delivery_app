@@ -48,7 +48,7 @@ class FoodTitleWidget extends StatelessWidget {
                 direction: Axis.vertical,
                 children: [
                   Text(
-                    "${fooddata.name}\$",
+                    "${fooddata.name} ",
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         fontSize: 20.0,
@@ -73,15 +73,11 @@ class FoodTitleWidget extends StatelessWidget {
                       SizedBox(
                         width: 5.0,
                       ),
-                      Text(
-                        "Cafe Western Food",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.black45),
-                      ),
+
                     ],
                   ),
                   Text(
-                    "${fooddata.price}\$",
+                    "${fooddata.price} JD",
                     style: TextStyle(
                         fontSize: 17.0,
                         fontWeight: FontWeight.bold,

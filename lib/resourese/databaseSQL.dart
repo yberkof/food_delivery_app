@@ -41,10 +41,10 @@ class DatabaseSql {
     );
   }
 
-  Future<bool> insertData(FoodModel food) async {
+  Future<bool> insertData(FoodModel food,int items) async {
     await database.transaction((txn) async {
       int id1 = await txn.rawInsert(
-          'INSERT INTO cartTable(keys, name, price,menuId,image,discount,description) VALUES("${food.keys}","${food.name}","${food.price}","${food.menuId}","${food.image}","${food.discount}","${food.description}")');
+          'INSERT INTO cartTable(keys, name, price,menuId,image,discount,description) VALUES("${food.keys}","${food.name}","${int.parse(food.price)*items}","${food.menuId}","${food.image}","${food.discount}","${food.description}")');
       print('inserted1: $id1');
     });
     return true;

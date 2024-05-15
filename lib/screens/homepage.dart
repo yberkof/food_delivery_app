@@ -64,6 +64,7 @@ class _HomePageContentState extends State<HomePageContent> {
       appBar: AppBar(
         iconTheme: new IconThemeData(color: Colors.white),
         elevation: 0.0,
+        backgroundColor:Colors.orange,
         title: Text(
           "Home",
           style: TextStyle(
@@ -100,7 +101,7 @@ class _HomePageContentState extends State<HomePageContent> {
                     ),
                   ),
                 ),
-                createListRecntlyAdd(),
+                // createListRecntlyAdd(),
                 SizedBox(
                   height: 10.0,
                 ),
@@ -116,7 +117,7 @@ class _HomePageContentState extends State<HomePageContent> {
                   ),
                 ),
                 createFoodCategory(),
-                createPopularFoodList(),
+                // createPopularFoodList(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: Text(

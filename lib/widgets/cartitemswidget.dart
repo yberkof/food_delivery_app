@@ -34,7 +34,7 @@ class _CartItemsState extends State<CartItems> {
     return GestureDetector(
       child: Container(
           color: UniversalVariables.whiteLightColor,
-          padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
           child: ListTile(
             leading: Container(
               child: ClipRRect(
@@ -54,7 +54,7 @@ class _CartItemsState extends State<CartItems> {
                   color: Colors.black),
             ),
             subtitle: Text(
-              "${widget.fooddata.price}\$",
+              "${widget.fooddata.price} JD",
               style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
             ),

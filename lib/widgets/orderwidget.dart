@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:food_delivery_app/models/food_model.dart';
 import 'package:food_delivery_app/models/request_model.dart';
 import 'package:food_delivery_app/utils/universal_variables.dart';
@@ -14,24 +15,29 @@ class OrderWidget extends StatefulWidget {
 }
 
 class _OrderWidgetState extends State<OrderWidget> {
-  List<Step> steps = [
-    Step(
-      content: Text('asd'),
-      title: Text('Placed'),
-      isActive: true,
-    ),
-    Step(
-      title: Text('On The Way'),
-      content: Text('asd'),
-      isActive: true,
-    ),
-    Step(
-      content: Text('Completed'),
-      title: Text('asd'),
-      isActive: true,
-    ),
-  ];
-
+  late List<Step> steps ;
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  steps=  [
+      Step(
+        content: Text(widget.request.address),
+        title: Text('Placed'),
+        isActive: true,
+      ),
+      Step(
+        title: Text('On The Way'),
+        content: Text('asd'),
+        isActive: false,
+      ),
+      Step(
+        content: Text('asd'),
+        title: Text('Completed'),
+        isActive: false,
+      ),
+    ];
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,7 +65,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                   "https://www.pngitem.com/pimgs/m/252-2523515_delivery-clipart-delivery-order-frames-illustrations.png"),
             ),
             trailing: Text(
-              widget.request.total + " Rs.",
+              widget.request.total + " JD",
               style: TextStyle(
                 color: UniversalVariables.orangeColor,
                 fontSize: 20.0,
@@ -92,11 +98,11 @@ class _OrderWidgetState extends State<OrderWidget> {
 
   createSatusBar() {
     return Container(
-      height: 100.0,
+      height: 30.h,
       child: Stepper(
         currentStep: int.parse(widget.request.status),
         steps: steps,
-        type: StepperType.horizontal,
+        type: StepperType.vertical,
         physics: NeverScrollableScrollPhysics(),
         controlsBuilder:
             (BuildContext context, ControlsDetails controlsDetails) =>

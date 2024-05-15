@@ -14,6 +14,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ import 'package:food_delivery_app/screens/CategoryListPage.dart';
 import 'package:food_delivery_app/screens/FoodDetailPage.dart';
 import 'package:food_delivery_app/screens/MyOrderPage.dart';
 import 'package:food_delivery_app/screens/SearchPage.dart';
+import 'package:food_delivery_app/screens/contact_us_widget.dart';
 import 'package:food_delivery_app/widgets/categorywidget.dart';
 import 'package:food_delivery_app/widgets/foodTitleWidget.dart';
 import 'package:provider/provider.dart';
@@ -85,10 +87,6 @@ class _HomePageContentState extends State<HomePageContent> {
                 SizedBox(
                   height: 10.0,
                 ),
-                createbanner(),
-                SizedBox(
-                  height: 10.0,
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 18.0, vertical: 5.0),
@@ -105,6 +103,11 @@ class _HomePageContentState extends State<HomePageContent> {
                 SizedBox(
                   height: 10.0,
                 ),
+                createbanner(),
+                SizedBox(
+                  height: 10.0,
+                ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: Text(
@@ -150,8 +153,8 @@ class _HomePageContentState extends State<HomePageContent> {
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     child: Stack(
                       children: <Widget>[
-                        Image.network(item.image,
-                            fit: BoxFit.cover, width: 1000.0),
+                        CachedNetworkImage(imageUrl:item.image,
+                            fit: BoxFit.cover, width: 1000.0,),
                         Positioned(
                           bottom: 0.0,
                           left: 0.0,
@@ -217,7 +220,7 @@ class _HomePageContentState extends State<HomePageContent> {
               accountName: Text(""),
               accountEmail: Text(homePageBloc.mFirebaseUser?.email ?? ""),
               currentAccountPicture: CircleAvatar(
-                  backgroundImage: NetworkImage(
+                  backgroundImage: CachedNetworkImageProvider(
                       "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg?w=1155&h=1528")),
             ),
             decoration: BoxDecoration(
@@ -266,6 +269,20 @@ class _HomePageContentState extends State<HomePageContent> {
             onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => MyOrderPage()));
+            },
+          ),
+          ListTile(
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+            ),
+            leading: Icon(
+              Icons.contact_mail,
+              color: Colors.orangeAccent,
+            ),
+            title: Text('Contact Us'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ContactUsPage()));
             },
           ),
           ListTile(
@@ -394,7 +411,7 @@ class _HomePageContentState extends State<HomePageContent> {
               onTap: () => gotoCateogry(homePageBloc.recentlyCategory),
               child: CircleAvatar(
                 radius: 35.0,
-                backgroundImage: NetworkImage(
+                backgroundImage: CachedNetworkImageProvider(
                     "https://www.pngitem.com/pimgs/m/398-3981213_how-to-draw-burger-burger-drawing-easy-hd.png",
                     scale: 60.0),
               )),
@@ -402,7 +419,7 @@ class _HomePageContentState extends State<HomePageContent> {
               onTap: () => gotoCateogry(homePageBloc.recentlyCategory2),
               child: CircleAvatar(
                 radius: 35.0,
-                backgroundImage: NetworkImage(
+                backgroundImage: CachedNetworkImageProvider(
                     "https://img.favpng.com/19/11/2/pizza-clip-art-vector-graphics-pepperoni-illustration-png-favpng-Mf177mM20Db6kFJa1SmMpQN5R.jpg",
                     scale: 60.0),
               )),
@@ -410,7 +427,7 @@ class _HomePageContentState extends State<HomePageContent> {
               onTap: () => gotoCateogry(homePageBloc.recentlyCategory3),
               child: CircleAvatar(
                 radius: 35.0,
-                backgroundImage: NetworkImage(
+                backgroundImage: CachedNetworkImageProvider(
                     "https://www.vippng.com/png/detail/133-1337804_french-fry-png-mcdonalds-french-fries-drawing.png",
                     scale: 60.0),
               )),
@@ -418,7 +435,7 @@ class _HomePageContentState extends State<HomePageContent> {
               onTap: () => gotoCateogry(homePageBloc.recentlyCategory4),
               child: CircleAvatar(
                 radius: 35.0,
-                backgroundImage: NetworkImage(
+                backgroundImage: CachedNetworkImageProvider(
                     "https://www.kindpng.com/picc/m/488-4883349_png-download-png-download-kfc-chicken-bowl-easy.png",
                     scale: 60.0),
               )),

@@ -14,6 +14,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -125,7 +126,7 @@ class _FoodDetailPageContentState extends State<FoodDetailPageContent> {
                             bottomLeft: Radius.circular(25.0),
                             bottomRight: Radius.circular(25.0)),
                         image: DecorationImage(
-                            image: NetworkImage(widget.fooddata.image),
+                            image: CachedNetworkImageProvider(widget.fooddata.image),
                             fit: BoxFit.cover),
                       ),
                     )),
@@ -164,7 +165,7 @@ class _FoodDetailPageContentState extends State<FoodDetailPageContent> {
                 padding:
                     const EdgeInsets.only(left: 18.0, top: 10.0, bottom: 10.0),
                 child: Text(
-                  widget.fooddata.price + " JD ",
+                  widget.fooddata.price.toString() + " JD ",
                   style: TextStyle(
                       fontSize: 25.0,
                       fontWeight: FontWeight.bold,
@@ -217,6 +218,26 @@ class _FoodDetailPageContentState extends State<FoodDetailPageContent> {
                   ],
                 ),
               ),
+            ],
+          ),
+          SizedBox(
+            height: 15.0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding:
+                const EdgeInsets.only(left: 18.0, top: 10.0, bottom: 10.0),
+                child: Text(
+                  widget.fooddata.calories.toString() + " Cals ",
+                  style: TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: UniversalVariables.orangeColor),
+                ),
+              ),
+
             ],
           ),
           SizedBox(

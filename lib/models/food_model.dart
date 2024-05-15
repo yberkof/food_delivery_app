@@ -14,33 +14,38 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import 'package:uuid/uuid.dart';
+
 class FoodModel {
   final String description;
-  final String discount;
+  // final double discount;
   final String image;
   final String menuId;
   final String name;
-  final String price;
+  final double price;
   final String keys;
+  final int calories;
 
   FoodModel(
       {required this.description,
-      required this.discount,
+      // required this.discount,
       required this.image,
       required this.menuId,
       required this.name,
       required this.price,
-      required this.keys});
+      required this.keys,
+      required this.calories});
 
   Map toMap(FoodModel food) {
     var data = Map<String, dynamic>();
     data['description'] = food.description;
-    data['discount'] = food.discount;
+    // data['discount'] = food.discount;
     data['image'] = food.image;
     data['menuId'] = food.menuId;
     data['name'] = food.name;
     data['price'] = food.price;
     data['keys'] = food.keys;
+    data['calories']=food.calories;
     return data;
   }
 
@@ -49,12 +54,13 @@ class FoodModel {
   ) {
     return FoodModel(
       description: mapData['description'],
-      discount: mapData['discount'],
+      // discount: mapData['discount'],
       image: mapData['image'],
       menuId: mapData['menuId'],
       name: mapData['name'],
-      price: mapData['price'],
-      keys: mapData['keys'],
+      price: double.parse(mapData['price'].toString()),
+      keys: mapData['keys']??Uuid().v4(),
+      calories: mapData['calories']
     );
   }
 }

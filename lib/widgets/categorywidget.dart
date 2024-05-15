@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/models/category_model.dart';
 import 'package:food_delivery_app/screens/CategoryListPage.dart';
@@ -5,6 +6,7 @@ import 'package:food_delivery_app/utils/universal_variables.dart';
 
 class CategoryWidget extends StatelessWidget {
   final CategoryModel category;
+
   CategoryWidget(this.category);
 
   @override
@@ -25,8 +27,8 @@ class CategoryWidget extends StatelessWidget {
               height: 200.0,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: Image.network(
-                  category.image,
+                child: CachedNetworkImage(
+                  imageUrl: category.image,
                   fit: BoxFit.cover,
                 ),
               ),

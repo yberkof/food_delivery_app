@@ -18,6 +18,7 @@ import 'dart:async';
 import 'package:food_delivery_app/models/food_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:uuid/uuid.dart';
 
 class DatabaseSql {
   late Database database;
@@ -35,7 +36,7 @@ class DatabaseSql {
       onCreate: (Database db, int version) async {
         // When creating the db, create the table
         await db.execute(
-          "CREATE TABLE cartTable(keys TEXT PRIMARY KEY, name TEXT, price TEXT,menuId TEXT,image TEXT,discount TEXT,description TEXT)",
+          "CREATE TABLE cartTable(Keys TEXT PRIMARY KEY, name TEXT, price TEXT,menuId TEXT,image TEXT,description TEXT,calories number)",
         );
       },
     );
@@ -44,7 +45,7 @@ class DatabaseSql {
   Future<bool> insertData(FoodModel food,int items) async {
     await database.transaction((txn) async {
       int id1 = await txn.rawInsert(
-          'INSERT INTO cartTable(keys, name, price,menuId,image,discount,description) VALUES("${food.keys}","${food.name}","${int.parse(food.price)*items}","${food.menuId}","${food.image}","${food.discount}","${food.description}")');
+          'INSERT INTO cartTable(keys, name, price,menuId,image,description,calories) VALUES("${food.keys}","${food.name}","${food.price*items}","${food.menuId}","${food.image}","${food.description}",${food.calories*items})');
       print('inserted1: $id1');
     });
     return true;

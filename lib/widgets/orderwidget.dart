@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:food_delivery_app/models/food_model.dart';
@@ -61,7 +62,7 @@ class _OrderWidgetState extends State<OrderWidget> {
               ),
             ),
             leading: CircleAvatar(
-              backgroundImage: NetworkImage(
+              backgroundImage: CachedNetworkImageProvider(
                   "https://www.pngitem.com/pimgs/m/252-2523515_delivery-clipart-delivery-order-frames-illustrations.png"),
             ),
             trailing: Text(
@@ -120,10 +121,10 @@ class _OrderWidgetState extends State<OrderWidget> {
         name: value["name"],
         image: value["image"],
         keys: value["keys"],
-        price: value["price"],
+        price: double.parse(value["price"].toString()),
         description: value["description"],
         menuId: value["menuId"],
-        discount: value["discount"],
+        calories: value['calories']??0
       );
       foodList.add(food);
     });

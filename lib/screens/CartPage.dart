@@ -14,8 +14,10 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:food_delivery_app/blocs/CartPageBloc.dart';
 import 'package:food_delivery_app/utils/universal_variables.dart';
 import 'package:food_delivery_app/widgets/cartitemswidget.dart';
@@ -99,16 +101,39 @@ class _CartPageContentState extends State<CartPageContent> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Total :",
+                "Total Calories :",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+
+                    fontSize: 20.0),
+              ),
+              Text(
+                "${cartPageBloc.totalCalories} Cals",
                 style: TextStyle(
                     fontWeight: FontWeight.normal,
+                    color: Colors.black,
+                    fontSize: 20.0),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Total :",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
                     fontSize: 25.0),
               ),
               Text(
                 "${cartPageBloc.totalPrice} JD",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                     color: Colors.black,
                     fontSize: 30.0),
               ),

@@ -14,6 +14,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/models/category_model.dart';
 import 'package:food_delivery_app/models/food_model.dart';
@@ -38,45 +39,39 @@ class _CategoryListPageState extends State<CategoryListPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+        Container(
+        padding: EdgeInsets.all(0.0),
+        child: Stack(
+          children: [
             Container(
-              alignment: Alignment.bottomLeft,
-              height: MediaQuery.of(context).size.height * 0.4,
-              width: MediaQuery.of(context).size.width,
+              height: 60.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(0.0),
-                    bottomRight: Radius.circular(80.0)),
-                image: DecorationImage(
-                    image: NetworkImage(widget.category.image),
-                    fit: BoxFit.cover),
-              ),
-              child: Stack(
-                children: [
-                  Container(
-                    height: 60.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(0.0),
-                          bottomRight: Radius.circular(80.0)),
-                      gradient: LinearGradient(
-                          colors: [Colors.black45, Colors.transparent],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      widget.category.name,
-                      style: TextStyle(
-                          fontSize: 35.0,
-                          fontWeight: FontWeight.bold,
-                          color: UniversalVariables.whiteColor),
-                    ),
-                  ),
-                ],
+                    bottomLeft: Radius.circular(25.0),
+                    bottomRight: Radius.circular(25.0)),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Material(
+                  borderRadius: BorderRadius.circular(25),
+                  color: Colors.orange.withOpacity(0.9),
+                  child: Container(height: 1,width: 1,)),
+            ),
+          ],
+        ),
+        alignment: Alignment.bottomLeft,
+        height: MediaQuery.of(context).size.height * 0.4,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(25.0),
+              bottomRight: Radius.circular(25.0)),
+          image: DecorationImage(
+              image: CachedNetworkImageProvider(widget.category.image),
+              fit: BoxFit.cover),
+        ),
+      ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
               decoration: BoxDecoration(
@@ -87,22 +82,6 @@ class _CategoryListPageState extends State<CategoryListPage> {
               ),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "12 restaurants",
-                        style: TextStyle(color: Colors.black45),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.menu,
-                          color: UniversalVariables.orangeColor,
-                        ),
-                        onPressed: () => null,
-                      )
-                    ],
-                  ),
                   createFoodList(),
                 ],
               ),

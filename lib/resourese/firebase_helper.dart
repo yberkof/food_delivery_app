@@ -83,7 +83,7 @@ class FirebaseHelper {
         Map e = element.value as Map<dynamic, dynamic>;
         // TODO: use keyname in lowercase
         CategoryModel category =
-            CategoryModel(image: e['Image'], name: e['Name'], keys: e['keys']);
+            CategoryModel(image: e['Image'], name: e['Name'], keys: e['Keys']);
         categoryList.add(category);
       }
     });
@@ -106,7 +106,8 @@ class FirebaseHelper {
             uid: e['uid'],
             status: e['status'],
             total: e['total'],
-            foodList: e['foodList']);
+            foodList: e['foodList'],
+        totalCalories: e['totalCalories']);
         requestList.add(request);
       }
     });
@@ -114,8 +115,8 @@ class FirebaseHelper {
     return requestList;
   }
 
-  Future<void> addOrder(String totalPrice, List<FoodModel> orderedFoodList,
-      String name, String address) async {
+  Future<void> addOrder(String totalPrice, String totalCalories,
+      List<FoodModel> orderedFoodList, String name, String address) async {
     // getter user details
     User? user = await AuthMethods().getCurrentUser();
     if (user == null) {
@@ -137,7 +138,8 @@ class FirebaseHelper {
         uid: uidtxt,
         status: statustxt,
         total: totaltxt,
-        foodList: aux);
+        foodList: aux,
+        totalCalories: totalCalories.toString());
 
     // add order to database
     await _ordersReference

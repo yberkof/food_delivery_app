@@ -14,6 +14,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/models/food_model.dart';
 import 'package:food_delivery_app/resourese/databaseSQL.dart';
@@ -39,7 +40,8 @@ class _CartItemsState extends State<CartItems> {
             leading: Container(
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(5.0),
-                  child: Image.network(
+                  child: CachedNetworkImage(
+                    imageUrl:
                     widget.fooddata.image,
                     fit: BoxFit.cover,
                   )),
@@ -53,10 +55,20 @@ class _CartItemsState extends State<CartItems> {
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             ),
-            subtitle: Text(
-              "${widget.fooddata.price} JD",
-              style:
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${widget.fooddata.price} JD",
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
+                ),
+                Text(
+                  "${widget.fooddata.calories} Cals",
+                  style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
+                ),
+              ],
             ),
             trailing: IconButton(
               icon: Icon(

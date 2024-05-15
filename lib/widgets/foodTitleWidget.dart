@@ -1,13 +1,17 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:food_delivery_app/models/food_model.dart';
 import 'package:food_delivery_app/screens/FoodDetailPage.dart';
 import 'package:food_delivery_app/utils/universal_variables.dart';
 
 class FoodTitleWidget extends StatelessWidget {
   final FoodModel fooddata;
+
   FoodTitleWidget(this.fooddata);
+
   @override
   Widget build(BuildContext context) {
     var random = new Random();
@@ -27,20 +31,41 @@ class FoodTitleWidget extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                height: 120.0,
-                width: 120.0,
+                height: 22.h,
+                width: 45.w,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.orange![100]!,
+                      offset: const Offset(
+                        5.0,
+                        5.0,
+                      ),
+                      blurRadius: 10.0,
+                      spreadRadius: 2.0,
+                    ), //BoxShadow
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: const Offset(0.0, 0.0),
+                      blurRadius: 0.0,
+                      spreadRadius: 0.0,
+                    ), //BoxShadow
+                  ],
+                ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(20.0),
                   child: Hero(
                       tag: "avatar_${fooddata.keys.toString()}",
-                      child: Image.network(
-                        fooddata.image,
-                        fit: BoxFit.cover,
+                      child: CachedNetworkImage(
+                        imageUrl: fooddata.image,
+                        fit: BoxFit.fill,
                       )),
                 ),
               ),
               SizedBox(
-                width: 10.0,
+                width: 5.w,
               ),
               Wrap(
                 spacing: 20.0, // gap between adjacent chips
@@ -73,11 +98,16 @@ class FoodTitleWidget extends StatelessWidget {
                       SizedBox(
                         width: 5.0,
                       ),
-
                     ],
                   ),
                   Text(
                     "${fooddata.price} JD",
+                    style: TextStyle(
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54),
+                  ),  Text(
+                    "${fooddata.calories} Cals",
                     style: TextStyle(
                         fontSize: 17.0,
                         fontWeight: FontWeight.bold,

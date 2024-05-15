@@ -23,7 +23,8 @@ import 'package:food_delivery_app/screens/homepage.dart';
 
 class CartPageBloc with ChangeNotifier {
   List<FoodModel> foodList = [];
-  int totalPrice = 0;
+  double totalPrice = 0;
+  double totalCalories = 0;
 
   FirebaseHelper mFirebaseHelper = FirebaseHelper();
   late DatabaseSql databaseSql;
@@ -36,8 +37,9 @@ class CartPageBloc with ChangeNotifier {
     foodList = await databaseSql.getData();
     //calculating total price
     foodList.forEach((food) {
-      int foodItemPrice = int.parse(food.price);
+      double foodItemPrice = food.price;
       totalPrice += foodItemPrice;
+      totalCalories += food.calories;
     });
     notifyListeners();
   }
@@ -45,7 +47,7 @@ class CartPageBloc with ChangeNotifier {
   // ignore: non_constant_identifier_names
   orderPlaceToFirebase(String name, String address) async {
     mFirebaseHelper
-        .addOrder(totalPrice.toString(), foodList, name, address)
+        .addOrder(totalPrice.toString(),totalCalories.toString(), foodList, name, address)
         .then((isAdded) {
       notifyListeners();
       if (context != null) {

@@ -21,6 +21,7 @@ class RequestModel {
   final String uid;
   final String status;
   final String total;
+  final String totalCalories;
 
   RequestModel({
     required this.address,
@@ -29,6 +30,7 @@ class RequestModel {
     required this.uid,
     required this.status,
     required this.total,
+    required this.totalCalories,
   });
 
   Map toMap(RequestModel request) {
@@ -39,6 +41,7 @@ class RequestModel {
     data['uid'] = request.uid;
     data['status'] = request.status;
     data['total'] = request.total;
+    data['totalCalories'] = request.totalCalories;
     return data;
   }
 
@@ -50,6 +53,7 @@ class RequestModel {
       uid: mapData['uid'],
       status: mapData['status'],
       total: mapData['total'],
+      totalCalories: mapData['totalCalories']
     );
   }
 }
